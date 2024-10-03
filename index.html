@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Titles with Count</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #title-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #count-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        #generate-btn {
+            padding: 10px 20px;
+            background-color: #f0d350;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #generate-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-container">
+        <div id="title">Click the button to generate a title</div>
+        <div id="count-info">Question 0 of 18</div>
+        <button id="generate-btn">Generate Title</button>
+    </div>
+
+    <script>
+        const titles = [
+            "Types of inheritance",
+            "Summary of Aggregation Points",
+            "Relational Database Schema",
+            "Objective ID and advantages",
+            "Object-Orient Analysis (OOA)",
+            "UP object-orient analysis and design process",
+            "Pros and cons of design pattern",
+            "Creational design pattern",
+            "Code refactoring",
+            "Extract method rule",
+            "Goals of software architecture",
+            "Design and domain expertise",
+            "Benefits of MVC Pattern",
+            "Disadvantages of MVC Pattern",
+            "Interaction between MVC components",
+            "The Repository Architecture Pattern",
+            "Simple MVC Architecture Example",
+            "The Layer Architecture Pattern Details"
+        ];
+        let usedTitles = [];
+        const totalQuestions = titles.length;
+        let currentCount = 0;
+
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            if (titles.length === 0) {
+                document.getElementById('title').innerText = "No more titles!";
+                this.disabled = true;
+                return;
+            }
+
+            // Generate a random index from the remaining titles
+            const randomIndex = Math.floor(Math.random() * titles.length);
+            const selectedTitle = titles.splice(randomIndex, 1)[0];
+
+            // Display the selected title
+            document.getElementById('title').innerText = selectedTitle;
+
+            // Increment the current count
+            currentCount++;
+
+            // Update the count info
+            document.getElementById('count-info').innerText = `Question ${currentCount} of ${totalQuestions}`;
+
+            // Add the selected title to the usedTitles array
+            usedTitles.push(selectedTitle);
+        });
+    </script>
+</body>
+</html>
